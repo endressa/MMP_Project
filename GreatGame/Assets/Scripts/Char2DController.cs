@@ -6,7 +6,7 @@ public class Char2DController : MonoBehaviour
 {
     public float MovementSpeed = 5;
     public float JumpForce = 20;
-    private Rigidbody2D _rigidbody; //da wir rigidbody häufig brauchen, speichern wir eine referenz, wenn der Character erstellt wird start()
+    public Rigidbody2D _rigidbody; //da wir rigidbody häufig brauchen, speichern wir eine referenz, wenn der Character erstellt wird start()
     void Start()
     // Start is called before the first frame update
     {
@@ -37,11 +37,11 @@ public class Char2DController : MonoBehaviour
         transform.localScale = characterScale;
 
         //default input system to detect Jump Input
-        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
+        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.1f){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
             //"add a force in the y-axis" on the rigidbody", "The force we want to aplly is an impulse
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
         }
-        //if(Input.GetButtonDown("down")){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
+        //if(Input.GetButtonDown("down")){
         //    characterScale.x = -10;
         //}
     }
