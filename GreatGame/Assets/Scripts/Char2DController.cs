@@ -12,7 +12,6 @@ public class Char2DController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,7 +30,7 @@ public class Char2DController : MonoBehaviour
             characterScale.x = 1;
         } else if (Input.GetAxisRaw("Vertical") < 0){   //crouch NOT FINISHED
             characterScale.y = 0.5f;
-        } else if (Input.GetAxisRaw("Vertical") > 0){
+        } else if(!(Input.GetAxisRaw("Vertical") < 0)){
             characterScale.y = 1;
         }
         transform.localScale = characterScale;
