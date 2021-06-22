@@ -6,13 +6,12 @@ public class Char2DController : MonoBehaviour
 {
     public float MovementSpeed = 5;
     public float JumpForce = 20;
-    private Rigidbody2D _rigidbody; //da wir rigidbody häufig brauchen, speichern wir eine referenz, wenn der Character erstellt wird start()
+    public Rigidbody2D _rigidbody; //da wir rigidbody häufig brauchen, speichern wir eine referenz, wenn der Character erstellt wird start()
     void Start()
     // Start is called before the first frame update
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,17 +30,17 @@ public class Char2DController : MonoBehaviour
             characterScale.x = 1;
         } else if (Input.GetAxisRaw("Vertical") < 0){   //crouch NOT FINISHED
             characterScale.y = 0.5f;
-        } else if (Input.GetAxisRaw("Vertical") > 0){
+        } else if(!(Input.GetAxisRaw("Vertical") < 0)){
             characterScale.y = 1;
         }
         transform.localScale = characterScale;
 
         //default input system to detect Jump Input
-        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
+        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.1f){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
             //"add a force in the y-axis" on the rigidbody", "The force we want to aplly is an impulse
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
         }
-        //if(Input.GetButtonDown("down")){ //y-axis Geschwindigkeit verwenden, um nur einen Sprung zuzulassen
+        //if(Input.GetButtonDown("down")){
         //    characterScale.x = -10;
         //}
     }
